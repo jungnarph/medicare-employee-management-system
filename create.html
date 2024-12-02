@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Create</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="bootstrap.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container-fluid mobile-nav">
+        <div class="row logo-container align-items-center position-relative">
+            <div class="col-12 text-center text-md-left py-3">
+                <button class="hamburger-button btn" aria-label="Menu" id="toggleSidebar">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </button>
+                <img src="" alt="Logo" class="img-fluid logo-main" style="max-width: 10rem;">
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.4.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <main class="main-content">
+        <div class="container d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+            <div class="btn-toolbar mb-2 mb-md-0">
+                <h1 class="h2">Add New Patient</h1>
+            </div>
+        </div>
+
+        
+        <div class="container">
+            <form action="" method="" enctype="">
+                <div class="form-group">
+                    <label for="username">Employee Name</label>
+                    <input type="text" class="form-control" id="EmployeeName" name="EmployeeName" placeholder="EmployeeName" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Salary</label>
+                    <input type="text" class="form-control" id="Salary" name="Salary" placeholder="Salary" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Position</label>
+                    <input type="text" class="form-control" id="Position" name="Position" placeholder="Position" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Department</label>
+                    <input type="text" class="form-control" id="Department" name="Department" placeholder="Department" required>
+                </div>
+    
+    
+                <div class="form-group row create-form-buttons">
+                    <div class="col">
+                        <a href="index.html" class="btn btn-secondary">Cancel</a>
+                    </div>
+                    <div class="col">
+                        <button type="button" id="submitBtn" class="btn btn-primary">Create</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <script>
+        document.getElementById('submitBtn').addEventListener('click', () => {
+            const EmployeeName = document.getElementById('EmployeeName').value;
+            const Salary = document.getElementById('Salary').value;
+            const Position = document.getElementById('Position').value;
+            const Department = document.getElementById('Department').value;
+
+            const jsonObject = {
+                EmployeeName: EmployeeName,
+                Salary: Salary,
+                Position: Position,
+                Department: Department
+            };
+
+            const formattedObject = {
+                body: JSON.stringify(jsonObject)
+            };
+
+            const jsonString = JSON.stringify(formattedObject);
+            console.log(jsonString);
+
+            fetch('https://bptby3teb1.execute-api.us-east-1.amazonaws.com/prod/Employee/postEmployee', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: jsonString
+            })
+            .then(response => {
+                if (response.ok) {
+                    window.location.href = 'index.html';
+                } else {
+                
+            }})
+
+        });
+    </script>
+</body>
+</html>
